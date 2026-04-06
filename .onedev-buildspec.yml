@@ -13,6 +13,10 @@ jobs:
   triggers:
   - type: BranchUpdateTrigger
     userMatch: anyone
+  - type: ScheduleTrigger
+    cronExpression: 0 0 * * * ?
+    branches: master
+    projects: Onedev-Nixos-Flake
   retryCondition: never
   maxRetries: 3
   retryDelay: 30
