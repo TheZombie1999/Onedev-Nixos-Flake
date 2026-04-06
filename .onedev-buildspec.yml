@@ -2,17 +2,6 @@ version: 43
 jobs:
 - name: onedev-repo-sync
   steps:
-  - type: PullRepository
-    name: Onedev-Nixos-Flake
-    remoteUrl: https://github.com/TheZombie1999/Onedev-Nixos-Flake.git
-    userName: TheZombie1999
-    passwordSecret: Github
-    targetProject: Onedev-Nixos-Flake
-    refs: refs/heads/* refs/tags/*
-    withLfs: false
-    force: true
-    condition: SUCCESSFUL
-    optional: false
   - type: PushRepository
     name: Onedev-Nixos-Flake
     remoteUrl: https://github.com/TheZombie1999/Onedev-Nixos-Flake.git
