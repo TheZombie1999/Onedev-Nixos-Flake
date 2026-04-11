@@ -22,21 +22,41 @@ in
         default = "/opt/onedev/";
         description = "The folder Onedev reads and writes to.";
       };
-
+      http_host = lib.mkOption {
+        type = lib.types.str;
+        default = "0.0.0.0";
+        description = "The Ip-Address onedev is reachable unter.";
+      };
+      http_port = lib.mkOption {
+        type = lib.types.port;
+        default = 6610;
+        description = "The Port the onedev application is reachable under.";
+      };
+      ssh_port = lib.mkOption {
+        type = lib.types.port;
+        default = 6611;
+        description = "The port used for ssh access of onedev.";
+      };
     };
-
   };
 
   config =
     let
-      onedev = pkgs.callPackage ./onedev.nix { installDir = cfg.installDir; };
-      hibernateConfig = pkgs.callPackage ./hibernate-config.nix { installDir = cfg.installDir; };
-      serverConfig = pkgs.callPackage ./server-config.nix { installDir = cfg.installDir; };
+      onedev = pkgs.callPackage ./onedev.nix { inherit (cfg) installDir; };
+      hibernateConfig = pkgs.callPackage ./hibernate-config.nix { inherit (cfg) installDir; };
+      serverConfig = pkgs.callPackage ./server-config.nix {
+        inherit (cfg)
+          installDir
+          http_host
+          http_port
+          ssh_port
+          ;
+      };
     in
     lib.mkIf cfg.enable {
 
       environment.systemPackages = [ onedev ];
-      
+
       fileSystems = {
         "/opt/onedev" = {
           overlay = {
