@@ -29,12 +29,12 @@ in
       };
       http_port = lib.mkOption {
         type = lib.types.port;
-        default = 6610;
+        default = "6610";
         description = "The Port the onedev application is reachable under.";
       };
       ssh_port = lib.mkOption {
         type = lib.types.port;
-        default = 6611;
+        default = "6611";
         description = "The port used for ssh access of onedev.";
       };
     };
