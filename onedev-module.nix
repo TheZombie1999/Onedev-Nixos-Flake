@@ -31,13 +31,13 @@ in
         type = lib.types.port;
         default = 6610;
         description = "The Port the onedev application is reachable under.";
-        apply = lib.strings.toString;
+        apply = toString;
       };
       ssh_port = lib.mkOption {
         type = lib.types.port;
         default = 6611;
         description = "The port used for ssh access of onedev.";
-        apply = lib.strings.toString;
+        apply = toString;
       };
     };
   };
